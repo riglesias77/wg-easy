@@ -14,6 +14,10 @@ FROM alpine:3.14.8 AS build_node_modules
 # Copy Web UI
 COPY src/ /app/
 WORKDIR /app
+RUN apk add -U --no-cache \
+  wireguard-tools \
+  dumb-init \
+  npm
 RUN npm ci --production
 
 # Copy build result to a new image.
