@@ -9,7 +9,7 @@
 # #
 # #
 
-FROM current-alpine3.16 AS build_node_modules
+FROM alpine:3.14.8 AS build_node_modules
 
 # Copy Web UI
 COPY src/ /app/
@@ -18,7 +18,7 @@ RUN npm ci --production
 
 # Copy build result to a new image.
 # This saves a lot of disk space.
-FROM current-alpine3.16
+FROM alpine:3.14.8
 COPY --from=build_node_modules /app /app
 
 # Move node_modules one directory up, so during development
